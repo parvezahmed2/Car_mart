@@ -1,0 +1,42 @@
+ {% extends 'base.html' %}
+
+ {% block content %}
+
+
+ <div class="row">
+      <div class="col-6">
+        <div class="col-sm-8 mx-5  mb-sm-0 ">
+            <div class="card mx-2">
+              <div class="card-body">
+                  <img src="{{car.image.url}}" class="card-img-top" alt="">
+                </div>
+              </div>
+            </div>
+      </div>
+          
+          
+      <div  class="col-6">
+        <div class="col-sm-6 mt-5 m-5 mb-sm-0 ">
+            <div class="card mx-2">
+              <div class="card-body">
+                <h5 class="card-title"><a href="" class="text-decoration-none text-dark"> Name: {{car.model_name}}</a></h5>
+                <p class="card-text"> price : {{car.price}}</p>
+
+                <p>Details Info : {{car.description }} </p>
+                <p>Brand :  {{car.brand.name}} </p>
+                <p>Length :     {{car.quantity}} </p>
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'buyNow' car.id %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Buy Now">
+                </form>
+                 {% endif %}
+
+                </div>
+              </div>
+            </div>
+      </div>     
+              
+</div>
+
+ {% endblock %}

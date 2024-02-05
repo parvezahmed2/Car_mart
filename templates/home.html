@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+
+<div class="d-flex flex-warp px-5 pt-3 align-items-center" >
+
+    <div class="col-6 ">
+        <h1>Welcome to Django Blog </h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, laudantium! Numquam voluptas non culpa, adipisci id optio error itaque doloribus aut nam iste nostrum delectus, asperiores quod necessitatibus repudiandae. Placeat doloribus, dicta autem perferendis recusandae ex suscipit? Magnam tenetur temporibus sint odio iste, reiciendis, error nisi nobis repellendus expedita provident corporis magni consequatur facere! Suscipit maxime labore corrupti ea, necessitatibus consectetur commodi tenetur sit eum voluptas non, ratione sapiente! Maiores, fuga? Temporibus at nemo accusantium ducimus, non ipsum eos a excepturi sapiente ea quis enim similique nobis numquam repudiandae sint corporis pariatur quia. Eius cupiditate obcaecati officia aut, dolor vero?</p>
+      
+      </div>
+      <div class="col-6">
+      <img src="{% static 'blog.jpg'%}" alt="">
+      </div>
+
+
+</div>
+
+ 
+
+<div class="d-flex gap-5 mb-3 mt-5   ">
+
+    {% for brand in brands %}
+
+    <div  class="form-check  ">
+     <input  class="form-check-input" type="radio" name="brand" id="{{brand.id}}">
+     <label class="form-check-label" for="{{brand.id}}">
+        
+        <a   href="{% url 'brand_wise_cars' brand_slug=brand.slug %}" class="text-decoration-none  text-dark"> {{brand.name}}</a>
+     </label>
+    </div>
+    
+    
+    {% endfor %}
+</div>
+
+
+
+
+<div class="d-flex flex-wrap   px-5">
+  
+    {% for post in data %}
+     
+    <div class="col-sm-3 mb-3 mb-sm-0 ">
+      <div class="card mx-2">
+        <div class="card-body">
+            <img src="{{post.image.url}}" class="card-img-top" alt="">
+            <h5 class="card-title"><a href="" class="text-decoration-none text-dark">{{post.model_name}}</a></h5>
+            <p class="card-text"> price : {{post.price}}</p>
+            <p>Brand :  {{post.brand.name}} </p>
+            <h3 ><a href="{% url 'detail_post' post.id %} " class="btn btn-primary">View Details</a></h3>
+             
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
