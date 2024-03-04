@@ -5,5 +5,5 @@ from .views import DetailPostView
 urlpatterns = [
     
     path('details/<int:id>/', views.DetailPostView.as_view(), name = 'detail_post'),
-     path('buy/<int:id>/', views.buyNow, name='buyNow'),
+     path('buy/<int:car_id>/', views.buyNow.as_view(), name='buyNow'),
 ]

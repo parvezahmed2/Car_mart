@@ -16,6 +16,25 @@ class Car(models.Model):
 
 
 
+
+
+
+class BuyCar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    purchase_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.purchase_date)
+
+
+
+
+
+
+
+
+
 class Comment(models.Model):
     post = models.ForeignKey(Car, on_delete = models.CASCADE, related_name='comments')
     name = models.CharField(max_length=30)
@@ -24,3 +43,5 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"Comments by {self.name}"
+
+

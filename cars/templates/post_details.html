@@ -1,5 +1,5 @@
  {% extends 'base.html' %}
-
+ {% load crispy_forms_tags %}
  {% block content %}
 
 
@@ -24,11 +24,11 @@
 
                 <p>Details Info : {{car.description }} </p>
                 <p>Brand :  {{car.brand.name}} </p>
-                <p>Length :     {{car.quantity}} </p>
+                <p>Quantity :     {{car.quantity}} </p>
                 {% if user.is_authenticated %}
-                <form method="post" action="{% url 'buyNow' car.id %}">
+                <form method="post" action="{% url 'buyNow' car_id=car.id  %}">
                     {% csrf_token %}
-                    <input type="submit" value="Buy Now">
+                    <input class=" btn btn-primary" type="submit" value="Buy Now">
                 </form>
                  {% endif %}
 
@@ -37,6 +37,34 @@
             </div>
       </div>     
               
+</div>
+
+
+
+
+<div class="card m-2">
+  <h5 class="p-3">Total Comments: {{comments | length}}</h5>
+  <div class="card-body">
+      {% for cmt in comments %}
+       
+      <p>{{cmt.body}}</p>
+      {% endfor %}
+  </div>
+</div>
+
+
+
+<div class="card m-2">
+ 
+  <div class="card-body">
+      <form action=""  method="post" >
+          <h1>Add comment</h1>
+          {% csrf_token %}
+          {{comment_form | crispy}}
+          <button class="btn btn-primary">Submit</button>
+      
+      </form>
+  </div>
 </div>
 
  {% endblock %}

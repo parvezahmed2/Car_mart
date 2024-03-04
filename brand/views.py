@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, update_session_auth_hash, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from cars.models import Car
+from cars.models import Car, BuyCar
 
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
@@ -26,10 +26,9 @@ def register(request):
 
 class UserLoginView(LoginView):
     template_name = 'register.html'
-    # success_url = reverse_lazy('profile')
     def get_success_url(self):
         return reverse_lazy('profile')
-
+    
     def form_valid(self, form):
         messages.success(self.request, 'Logged in Successful')
         return super().form_valid(form)
@@ -50,7 +49,7 @@ class UserLoginView(LoginView):
 
 @login_required
 def profile(request):
-    data = Car.objects.filter(brand__user=request.user)
+    data = BuyCar.objects.all()
     return render(request, 'profile.html', {'data' : data})
 
 @login_required
@@ -85,3 +84,9 @@ def pass_change(request):
         form = PasswordChangeForm(user=request.user)
     
     return render(request, 'pass_change.html', {'form' : form})
+
+
+
+
+
+ 
